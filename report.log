@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.15)  13 FEB 2018 21:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.15)  14 FEB 2018 01:28
 entering extended mode
 **./report.tex
 (report.tex
@@ -556,35 +556,49 @@ Package pdftex.def Info: UCU-Apps.png used on input line 86.
 (pdftex.def)             Requested size: 256.3297pt x 113.81102pt.
  [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <./UCU-Apps.png>] [1]
-<sophie.jpg, id=19, 236.885pt x 214.8025pt>
-File: sophie.jpg Graphic file (type jpg)
- <use sophie.jpg>
-Package pdftex.def Info: sophie.jpg used on input line 138.
-(pdftex.def)             Requested size: 195.0pt x 176.82748pt.
- [2 <./sophie.jpg>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 169.
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <./UCU-Apps.png>]
+Overfull \hbox (1.1691pt too wide) in paragraph at lines 111--111
+[][][][]\OT1/cmr/m/n/12 rewrite 
+ []
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 169.
 
-Underfull \hbox (badness 2644) in paragraph at lines 178--181
+Overfull \hbox (1.1691pt too wide) in paragraph at lines 111--111
+[][][][]\OT1/cmr/m/n/12 rewrite 
+ []
+
+
+Overfull \hbox (1.1691pt too wide) in paragraph at lines 111--111
+[][][][]\OT1/cmr/m/n/12 rewrite 
+ []
+
+
+Overfull \hbox (1.1691pt too wide) in paragraph at lines 111--111
+[][][][]\OT1/cmr/m/n/12 rewrite 
+ []
+
+
+<geometric-PCA-8-both-components-with-plane.png, id=14, 575.0283pt x 493.3632pt
+>
+File: geometric-PCA-8-both-components-with-plane.png Graphic file (type png)
+ <use geometric-PCA-8-both-components-with-plane.png>
+Package pdftex.def Info: geometric-PCA-8-both-components-with-plane.png used on
+ input line 122.
+(pdftex.def)             Requested size: 195.0pt x 167.30464pt.
+ [1] [2 <./geometric-PCA-8-both-components-with-plane.png>]
+Underfull \hbox (badness 2644) in paragraph at lines 161--164
 []\OT1/cmr/m/n/12 Bishop, Christo-pher M. \OT1/cmr/m/it/12 Pat-tern Recog-ni-ti
 on and Ma-chine Learn-ing.
  []
 
 [3] (report.aux) ) 
 Here is how much of TeX's memory you used:
- 13663 strings out of 493323
- 265887 string characters out of 3139065
- 324360 words of memory out of 3000000
- 16919 multiletter control sequences out of 15000+200000
+ 13654 strings out of 493323
+ 265986 string characters out of 3139065
+ 327553 words of memory out of 3000000
+ 16914 multiletter control sequences out of 15000+200000
  11373 words of font info for 40 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,9n,80p,438b,704s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 62i,9n,80p,564b,908s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
 mbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pf
 b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/P
@@ -596,9 +610,9 @@ onts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
 amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
 cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.
 pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on report.pdf (4 pages, 255746 bytes).
+Output written on report.pdf (4 pages, 462292 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
+ 70 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  23 words of extra memory for PDF output out of 10000 (max. 10000000)
 

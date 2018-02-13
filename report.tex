@@ -93,6 +93,7 @@ Irynei \textsc{Baran}\\Hanna \textsc{Pylieva}\\[1cm] % Your name
 
 
 \begin{abstract}
+\todo{revise Abstract after finishing}
 Principal component analysis (PCA) is a
 popular tool for linear dimensionality reduction
 and feature extraction. Kernel PCA
@@ -107,70 +108,52 @@ problems. We also provide an overview of PCA and kPCA applications.
 \end{abstract}
 
 \section{Introduction}
-
+\todo{rewrite the introduction}
 In this section, we briefly review the principal component
 analysis method, it's applications and limitations.
 
-\subsection{Principal Component Analysis}
-Principal component analysis, or PCA, is a technique that is widely used for applications
-such as dimensionality reduction, lossy data compression, feature extraction,
-and data visualization. 
-PCA can be defined as the orthogonal projection of the data onto a lower
-dimensional linear space, known as the principal subspace, such that the variance of
-the projected data is maximized \citep*{bishop}. 
+\section{Principal Component Analysis}
+Principal component analysis, or PCA, is a mathematical procedure widely used for dimensionality reduction and feature selection. Those applications are achieved by projecting the data orthogonally onto a space with lower dimension, known as the principal subspace or feature space, such that the variance of projected data is maximized \citep*{bishop}.
 
+Consider a data set $X$ containing $N$ observations of $D$ features ($D<N$). In order to visualize data or diminish number of features for modeling we want to reduce dimensionality of feature space to $M<D$. Whereas we are interested in most influential features to minimize data losses, that is why our goal is to maximize variance of projected data. The directions on which the data is projected called principal components. They are orthogonal and form coordinate system of subspace $M$ (see on Figure ~\ref{fig:pr-omponents}).
 
-\section{Examples}
-
-\subsection{Comments}
-
-Comments can be added to the margins of the document using the \todo{Here's a comment in the margin!} todo command, as shown in the example on the right. You can also add inline comments too:
-
-\todo[inline, color=green!40]{This is an inline comment.}
-
-\subsection{Tables and Figures}
-
-Use the table and tabular commands for basic tables --- see Table~\ref{tab:widgets}, for example. You can upload a figure (JPEG, PNG or PDF) using the files menu. To include it in your document, use the includegraphics command as in the code for Figure~\ref{fig:sophie} below.
-
-% Commands to include a figure:
 \begin{figure}
-\centering
-\includegraphics[width=0.5\textwidth]{sophie.jpg}
-\caption{\label{fig:sophie}This is a figure caption.}
+	\centering
+	\includegraphics[width=0.5\textwidth]{geometric-PCA-8-both-components-with-plane.png}
+	\caption{\label{fig:pr-omponents}Principal components}
 \end{figure}
 
-\begin{table}
-\centering
-\begin{tabular}{l|r}
-Item & Quantity \\\hline
-Widgets & 42 \\
-Gadgets & 13
-\end{tabular}
-\caption{\label{tab:widgets}An example table.}
-\end{table}
+\subsection{Finding principal components}
+To begin with, consider the projection on $M$ when $dim(M)=1$. Let a unit vector $u_1 \in D$ be the direction of $M$. Then projection of an observation $x_n\in X$ onto $M$ is $u_1^Tx_n$ and the variance of projected data is
+\begin{equation}\label{var_proj}
+ \dfrac{1}{N}\sum_{n=1}^{N}{\{u_1^T x_n - u_1^T \bar{x}\}}=u_1^T S u_1
+\end{equation}
+	 
+\todo[inline]{do we need to provide formula of covariance matrix explicitly? I don't feel so..}
+where $\bar{x} = \frac{1}{N}\sum_{n=1}^{N} x_i$ is the mean of sample set and $S$ is the covariance matrix of data set $X$.
 
-\subsection{Mathematics}
+Maximization of \eqref{var_proj} is kept in a unit circle as we chose $u_1$ s.t. $||u_1||=u_1^T u_1=1$. So we need to find maximum of the next Lagrange function:
+\begin{equation}
+L(X,\lambda_1) = u_1^T S u_1 + \lambda_1(1-u_1^T u_1)
+\end{equation}
 
-\LaTeX{} is great at typesetting mathematics. Let $X_1, X_2, \ldots, X_n$ be a sequence of independent and identically distributed random variables with $\text{E}[X_i] = \mu$ and $\text{Var}[X_i] = \sigma^2 < \infty$, and let
-$$S_n = \frac{X_1 + X_2 + \cdots + X_n}{n}
-      = \frac{1}{n}\sum_{i}^{n} X_i$$
-denote their mean. Then as $n$ approaches infinity, the random variables $\sqrt{n}(S_n - \mu)$ converge in distribution to a normal $\mathcal{N}(0, \sigma^2)$.
+By setting the derivative with respect to $u_1$ equal to zero we find that in stationary point $u_1$ needs to be an eigenvector of S:
+\begin{equation}
+S u_1 = \lambda_1 u_1
+\end{equation}
+Now when we left-multiply by $u^T_1$ and make use of $u^T_1 u_1 = 1$ we find out that the variance is given by
+\begin{equation}
+u_1^T S u_1 = \lambda_1 
+\end{equation}
+and so the variance will be a maximum when we set $u_1$ equal to the eigenvector
+having the largest eigenvalue $\lambda_1$. This eigenvector id called the first principal
+component \citep*{bishop}.
 
-\subsection{Lists}
+Next principal components can be found following the same procedure and choosing each new direction such that it maximizes the projected variance amongst all possible directions orthogonal to those already considered.
 
-You can make lists with automatic numbering \dots
+\todo[inline]{Do we need better explain the durther procedure of it's clear enough?}
 
-\begin{enumerate}
-\item Like this,
-\item and like this.
-\end{enumerate}
-\dots or bullet points \dots
-\begin{itemize}
-\item Like this,
-\item and like this.
-\end{itemize}
 
-We hope you find write\LaTeX\ useful, and please let us know if you have any feedback using the help menu above.
 
 \begin{thebibliography}{9}
 
