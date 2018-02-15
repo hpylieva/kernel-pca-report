@@ -39,6 +39,8 @@
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{natbib}
 
+
+\usepackage{hyperref}
 \begin{document}
 
 \begin{titlepage}
@@ -113,22 +115,21 @@ In this section, we briefly review the principal component
 analysis method, it's applications and limitations.
 
 \section{Principal Component Analysis}
-Principal component analysis, or PCA, is a mathematical procedure widely used for dimensionality reduction and feature selection. Those applications are achieved by projecting the data orthogonally onto a space with lower dimension, known as the principal subspace or feature space, such that the variance of projected data is maximized \citep*{bishop}.
+Principal component analysis, or PCA, is a mathematical procedure which is widely used for dimensionality reduction and feature selection. Those applications are achieved by projecting the data orthogonally onto a space with lower dimension, known as the principal subspace or feature space, such that the variance of projected data is maximal \citep*{bishop}.
 
-Consider a data set $X$ containing $N$ observations of $D$ features ($D<N$). In order to visualize data or diminish number of features for modeling we want to reduce dimensionality of feature space to $M<D$. Whereas we are interested in most influential features to minimize data losses, that is why our goal is to maximize variance of projected data. The directions on which the data is projected called principal components. They are orthogonal and form coordinate system of subspace $M$ (see on Figure ~\ref{fig:pr-omponents}).
+Consider a data set $X$ containing $N$ observations of $D$ features ($D<N$). In order to visualize data or diminish number of features for modeling we want to reduce dimensionality of feature space to $M<D$. Whereas we are interested in most influential features to minimize data losses, that is why our goal is to maximize variance of projected data. The directions on which the data is projected called principal components. They are orthogonal and form coordinate system of subspace $M$ (see on Figure ~\autoref{fig:pr-components}).
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\textwidth]{geometric-PCA-8-both-components-with-plane.png}
-	\caption{\label{fig:pr-omponents}Principal components}
+	\includegraphics[scale=0.3]{geometric-PCA-8-both-components-with-plane.png}
+	\caption{\label{fig:pr-components}Principal components}
 \end{figure}
 
 \subsection{Finding principal components}
 To begin with, consider the projection on $M$ when $dim(M)=1$. Let a unit vector $u_1 \in D$ be the direction of $M$. Then projection of an observation $x_n\in X$ onto $M$ is $u_1^Tx_n$ and the variance of projected data is
 \begin{equation}\label{var_proj}
  \dfrac{1}{N}\sum_{n=1}^{N}{\{u_1^T x_n - u_1^T \bar{x}\}}=u_1^T S u_1
-\end{equation}
-	 
+\end{equation}	 
 \todo[inline]{do we need to provide formula of covariance matrix explicitly? I don't feel so..}
 where $\bar{x} = \frac{1}{N}\sum_{n=1}^{N} x_i$ is the mean of sample set and $S$ is the covariance matrix of data set $X$.
 
@@ -153,7 +154,43 @@ Next principal components can be found following the same procedure and choosing
 
 \todo[inline]{Do we need better explain the durther procedure of it's clear enough?}
 
+\subsection{Limitations of standard PCA}
+Although PCA is very useful from practical prospective it has some limitations.
+\begin{enumerate}
+	\item Assumptions of linear dependency.
+	PCA projects data orthogonally to reduce dimensionality. This works only if data has linear dependent variables:  $y = k x + \epsilon$. Otherwise the method doesn't identify the direction where  projected data has highest possible variance which can be seen on Figure  ~\ref{fig:pca-cons-demo-1} . 
+	
+	\begin{figure}
+	%	\centering
+		\includegraphics[scale=0.4]{pca-linear-separation-demo.png}
+		\caption{\label{fig:pca-cons-demo-1}Demonstration of PCA's low performance for non-linearly dependent data}
+	\end{figure}
+	
+	\item Spread maximization. 
+	PCA searches for a subspace where projected data has the maximal spread. However, this is not always the best way to represent data in lower-dimension subspace. A common example is the task of separating and counting pancakes from an image (see Figure ~\ref{fig:pca-cons-demo-2}). Important information for the task (number of pancakes) is located along Z axis which has the lowest variance. So Z axis will be the last principal component identified by PCA which is not what required. 
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=.5\textwidth, scale=0.4]{pancakes.png}
+		\caption{\label{fig:pca-cons-demo-2}Image from  \href{http://golancourses.net/2014/kevan/01/23/3d-parametric-pancakes/}{3D Parametric Pancakes}
+		}
+	\end{figure}
+	
+	\item Principal components are hard to interpret.
+	PCA reveals implicit dependencies in data which is non-trivial to interpret in case of high-dimensional space reduction. The leverage for this issue is deep understanding of domain.
+	
+	\item Requirement of orthogonality.
+	PCA comes up with orthogonal principal components, which do not overlap in the space. For some tasks such functionality will produce wrong results (see Figure ~\ref{fig:pca-cons-demo-3}).
+	
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.5]{non-orthogonal-components.png}
+		\caption{\label{fig:pca-cons-demo-3}Demonstration of PCA's low performance for non-linearly dependent data}
+	\end{figure}
+	
+\end{enumerate}
 
+\subsection{Modifications of PCA}
 
 \begin{thebibliography}{9}
 
