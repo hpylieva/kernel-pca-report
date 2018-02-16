@@ -120,7 +120,7 @@ Principal component analysis, or PCA, is a mathematical procedure which is widel
 
 Consider a data set $X$ containing $N$ observations of $D$ features ($D<N$). In order to visualize data or diminish number of features for modeling we want to reduce dimensionality of feature space to $M<D$. Whereas we are interested in most influential features to minimize data losses, that is why our goal is to maximize variance of projected data. The directions on which the data is projected called principal components. They are orthogonal and form coordinate system of subspace $M$ (see on ~\autoref{fig:pr-components}).
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.3]{img/geometric-PCA-8-both-components-with-plane.png}
 	\caption{\label{fig:pr-components}Principal components}
@@ -131,7 +131,7 @@ To begin with, consider the projection on $M$ when $dim(M)=1$. Let a unit vector
 \begin{equation}\label{var_proj}
  \dfrac{1}{N}\sum_{n=1}^{N}{\{u_1^T x_n - u_1^T \bar{x}\}}=u_1^T S u_1
 \end{equation}	 
-\todo[inline]{do we need to provide formula of covariance matrix explicitly? I don't feel so..}
+\todo{do we need to provide formula of covariance matrix explicitly? I don't feel so..}
 where $\bar{x} = \frac{1}{N}\sum_{n=1}^{N} x_i$ is the mean of sample set and $S$ is the covariance matrix of data set $X$.
 
 Maximization of \eqref{var_proj} is kept in a unit circle as we chose $u_1$ s.t. $||u_1||=u_1^T u_1=1$. So we need to find maximum of the next Lagrange function:
@@ -153,7 +153,7 @@ component \citep*{bishop}.
 
 Next principal components can be found following the same procedure and choosing each new direction such that it maximizes the projected variance amongst all possible directions orthogonal to those already considered.
 
-\todo[inline]{Do we need better explain the further procedure of it's clear enough?}
+\todo{Do we need better explain the further procedure of it's clear enough?}
 
 \subsection{Limitations of standard PCA}
 Although PCA is very useful from practical prospective it has some limitations.
@@ -161,7 +161,7 @@ Although PCA is very useful from practical prospective it has some limitations.
 	\item Assumptions of linear dependency.
 	PCA projects data orthogonally to reduce dimensionality. This works only if data has linear dependent variables:  $y = k x + \epsilon$. Otherwise the method doesn't identify the direction where  projected data has highest possible variance which can be seen on   ~\autoref{fig:pca-cons-demo-1} . 
 	
-	\begin{figure}
+	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.5]{img/pca-linear-separation-demo.png}
 		\caption{\label{fig:pca-cons-demo-1}Demonstration of PCA's low performance for non-linearly dependent data}
@@ -183,7 +183,7 @@ Although PCA is very useful from practical prospective it has some limitations.
 	\item Requirement of orthogonality.
 	PCA comes up with orthogonal principal components, which do not overlap in the space. For some tasks such functionality will produce wrong results (see ~\autoref{fig:pca-cons-demo-3}).
 	
-	\begin{figure}
+	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.5]{img/non-orthogonal-components.png}
 		\caption{\label{fig:pca-cons-demo-3}Demonstration of PCA's low performance for non-linearly dependent data}
