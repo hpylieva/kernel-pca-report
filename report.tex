@@ -32,6 +32,7 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage{amsmath}
@@ -152,7 +153,7 @@ component \citep*{bishop}.
 
 Next principal components can be found following the same procedure and choosing each new direction such that it maximizes the projected variance amongst all possible directions orthogonal to those already considered.
 
-\todo[inline]{Do we need better explain the durther procedure of it's clear enough?}
+\todo[inline]{Do we need better explain the further procedure of it's clear enough?}
 
 \subsection{Limitations of standard PCA}
 Although PCA is very useful from practical prospective it has some limitations.
@@ -161,8 +162,8 @@ Although PCA is very useful from practical prospective it has some limitations.
 	PCA projects data orthogonally to reduce dimensionality. This works only if data has linear dependent variables:  $y = k x + \epsilon$. Otherwise the method doesn't identify the direction where  projected data has highest possible variance which can be seen on   ~\autoref{fig:pca-cons-demo-1} . 
 	
 	\begin{figure}
-	%	\centering
-		\includegraphics[scale=0.4]{img/pca-linear-separation-demo.png}
+		\centering
+		\includegraphics[scale=0.5]{img/pca-linear-separation-demo.png}
 		\caption{\label{fig:pca-cons-demo-1}Demonstration of PCA's low performance for non-linearly dependent data}
 	\end{figure}
 	
