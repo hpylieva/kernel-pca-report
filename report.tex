@@ -200,7 +200,7 @@ Although PCA is very useful from practical prospective it has some limitations.
 \end{enumerate}
 
 \section{Modifications of PCA}
-Despite the limitations mentioned, PCA is still a powerful method for dimensionality reduction. That is why numerous modifications were developed to overcome its drawbacks and broaden scope of applications. We will provide succinct description of the most common extensions of PCA.
+Despite the limitations mentioned, PCA is still a powerful method for data analysis, visualization and dimensionality reduction. That is why numerous modifications were developed to overcome its drawbacks and broaden scope of applications. We will provide succinct description of the most common extensions of PCA.
 
 \subsection{Robust PCA}
 Gross errors in observations are now ubiquitous in modern applications
@@ -219,16 +219,22 @@ Suppose we need to reduce dimensionality not of a simple matrix $M \in R^2$ but 
 
 MPCA is applied to 3-D object recognition tasks \citep{sahambi} in machine vision, medical image analysis, space-time analysis of video sequences for activity recognition \citep{green} in human-computer interaction, etc.  MPCA is further extended to uncorrelated MPCA, non-negative MPCA and robust MPCA.
 
+\subsection{Nonlinear generalizations}
+In real-world problems we often need to work with non-linear dependencies between features in data. For such tasks Hastie and Stuetzle \citep{hastie} proposed bending the loading
+vectors to produce curves that approximate the nonlinear relationship between
+a set of two variables. Such curves are called principal curves, their multidimensional extensions produce principal surfaces or principal manifolds \citep{gorban}.
+
+Another popular way to use PCA in case of nonlinearity is performing it in a reproducing kernel Hilbert space associated with a positive definite kernel. 
+\todo{Sentence needs revision. Now kept for purpose of structuring}
+This algorithm is called Kernel PCA and rest of the report will be devoted to it.
+
 \begin{thebibliography}{9}
 
 \bibitem[Bishop (2009)]{bishop}
-	Bishop, Christopher M.
-	\textit{Pattern Recognition
-	and Machine Learning}. Springer, Cambridge, U.K., 2006.
+ Bishop, Christopher M.\textit{Pattern Recognition and Machine Learning}. Springer, Cambridge, U.K., 2006.
 
 \bibitem[Shlens (2014)]{shlens}
-	Shlens, Jonathon. \textit{A Tutorial on Principal Component Analysis}.Google Research,
-	Mountain View, USA, 2014.
+ Shlens, Jonathon. \textit{A Tutorial on Principal Component Analysis}.Google Research, Mountain View, USA, 2014.
 
 \bibitem[Cardes (2009)]{cardes}
  Candes, Emmanuel J.; Li, Xiaodong ; Ma, Yi; Wright,John. \textit{Robust Principal Component Analysis?} J.ACM, 58(11):1-37, 2009 
@@ -240,8 +246,14 @@ MPCA is applied to 3-D object recognition tasks \citep{sahambi} in machine visio
 \bibitem[Sahambi (2003)]{sahambi} 
  Sahambi, Harkirat S.; Khorasani, Khakhayar. \textit{A neural-network appearance-based 3-D object recognition using independent component analysis} IEEE Transactions on Neural Networks, 14(1): 138-149, 2003. 
  
- \bibitem[Green (2004)]{green} Green, Richard D.; Guan, Ling. \textit{Quantifying and recognizing human movement patterns from monocular video images - Part II: Applications to biometrics}. IEEE Transactions on Circuits and Systems for Video Technology, 14(2): 191-198, 2004. 
- 	
+\bibitem[Green (2004)]{green} 
+ Green, Richard D.; Guan, Ling. \textit{Quantifying and recognizing human movement patterns from monocular video images - Part II: Applications to biometrics}. IEEE Transactions on Circuits and Systems for Video Technology, 14(2): 191-198, 2004. 
+ 
+\bibitem[Hastie (1989)]{hastie}
+ Hastie, Trevor; Stuetzle, Werner. \textit{Principal Curves}. Journal of the American Statistical Association, 84(406): 502-516, 1989.
+
+\bibitem[Gorban (2007)]{gorban}
+ Gorban,  Alexander N.; Kegl, Balazs; Wunsch, Donald C.; Zinovyev, Andrei. \textit{Principal Manifolds for Data Visualisation and Dimension Reduction}. Springer, Berlin – Heidelberg – New York, 2007. 
 \end{thebibliography}
 
 \end{document}
