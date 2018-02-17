@@ -41,7 +41,7 @@
 \usepackage{natbib}
 
 
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \begin{document}
 
 \begin{titlepage}
@@ -116,7 +116,7 @@ In this section, we briefly review the principal component
 analysis method, it's applications and limitations.
 
 \section{Principal Component Analysis}
-Principal component analysis, or PCA, is a mathematical procedure which is widely used for dimensionality reduction and feature selection. Those applications are achieved by projecting the data orthogonally onto a space with lower dimension, known as the principal subspace or feature space, such that the variance of projected data is maximal \citep*{bishop}.
+Principal component analysis, or PCA, is a mathematical procedure which is widely used for dimensionality reduction and feature selection. Those applications are achieved by projecting the data orthogonally onto a linear space with lower dimension, known as the principal subspace or feature space, such that the variance of projected data is maximal \citep*{bishop}.
 
 Consider a data set $X$ containing $N$ observations of $D$ features ($D<N$). In order to visualize data or diminish number of features for modeling we want to reduce dimensionality of feature space to $M<D$. Whereas we are interested in most influential features to minimize data losses, that is why our goal is to maximize variance of projected data. The directions on which the data is projected called principal components. They are orthogonal and form coordinate system of subspace $M$ (see on ~\autoref{fig:pr-components}).
 
@@ -153,9 +153,8 @@ component \citep*{bishop}.
 
 Next principal components can be found following the same procedure and choosing each new direction such that it maximizes the projected variance amongst all possible directions orthogonal to those already considered.
 
-\todo{Do we need better explain the further procedure of it's clear enough?}
 
-\subsection{Limitations of standard PCA}
+\subsection{Limitations of standard PCA}\label{limitations}
 Although PCA is very useful from practical prospective it has some limitations.
 \begin{enumerate}
 	\item Assumptions of linear dependency.
@@ -172,7 +171,7 @@ Although PCA is very useful from practical prospective it has some limitations.
 	
 	\begin{figure}
 		\centering
-		\includegraphics[width=.5\textwidth, scale=0.4]{img/pancakes.png}
+		\includegraphics[width=.5\textwidth, scale=0.4]{img/pancakes-white.png}
 		\caption{\label{fig:pca-cons-demo-2}Image from  \href{http://golancourses.net/2014/kevan/01/23/3d-parametric-pancakes/}{3D Parametric Pancakes}
 		}
 	\end{figure}
@@ -180,7 +179,7 @@ Although PCA is very useful from practical prospective it has some limitations.
 	\item Principal components are hard to interpret.
 	PCA reveals implicit dependencies in data which is non-trivial to interpret in case of high-dimensional space reduction. The leverage for this issue is deep understanding of domain.
 	
-	\item Requirement of orthogonality.
+	\item Orthogonality assumptions.
 	PCA comes up with orthogonal principal components, which do not overlap in the space. For some tasks such functionality will produce wrong results (see ~\autoref{fig:pca-cons-demo-3}).
 	
 	\begin{figure}[h]
@@ -188,18 +187,61 @@ Although PCA is very useful from practical prospective it has some limitations.
 		\includegraphics[scale=0.5]{img/non-orthogonal-components.png}
 		\caption{\label{fig:pca-cons-demo-3}Demonstration of PCA's low performance for non-linearly dependent data}
 	\end{figure}
+
+	\item Outliers and missing data sensitivity.
+	We introduced PCA here as eigenvalue decomposition of a data covariance matrix. The latter is highly sensitive to sample outliers and corrupted data (also referred as intra-sample outliers) \citep{shlens}. This raises two issues:
+		\begin{enumerate}
+			\item PCA is a linear combinations of all input variables whereas in case of corrupted or missing entries presence we need to exclude some incomplete variables.
+			
+			\item in some contexts, outliers can be difficult to identify. In this case we are unable to remove them in order to get better performance from PCA. Whereas there is a way to overcome the issue by introducing robustness to the algorithm. This will be considered beneath.
+		\end{enumerate}
+	
 	
 \end{enumerate}
 
-\subsection{Modifications of PCA}
+\section{Modifications of PCA}
+Despite the limitations mentioned, PCA is still a powerful method for dimensionality reduction. That is why numerous modifications were developed to overcome its drawbacks and broaden scope of applications. We will provide succinct description of the most common extensions of PCA.
+
+\subsection{Robust PCA}
+Gross errors in observations are now ubiquitous in modern applications
+such as image processing, web data analysis, and bioinformatics, where some measurements
+may be arbitrarily corrupted (due to occlusions, malicious tampering, or sensor failures) or simply irrelevant to the low-dimensional structure we seek to identify with PCA.The best algorithm which deals with data corruption is Robust PCA (RPCA).
+
+Suppose the data under study can naturally be decomposed into low-rank ($L_0$) and sparse ($S_0$) components\footnote{This is not a synthetic requirement and can be done in a number of applications, refer to \citep{cardes} for examples.}:
+\begin{equation}
+M = L_0 + S_0
+\end{equation}
+
+RPCA allows to recover a low-rank matrix $L_0$ from highly corrupted measurements in $M$. Classical PCA works good when the noise term $N_0$ in $M$ is small. In contrast to this $S_0$ can have arbitrarily large magnitude, and their support is assumed to be sparse but unknown \citep{cardes}.
+
+\subsection{Multilinear PCA}
+Suppose we need to reduce dimensionality not of a simple matrix $M \in R^2$ but of a n-way array, i.e. a cube or hyper-cube of numbers, also informally referred to as a "data tensor". Common examples of tensor are 2-D/3-D images and video sequences. To deal with tensors PCA is generalized to multilinear PCA (MPCA). MPCA performs feature extraction by determining a multilinear projection that captures most of the original tensorial input variation. The solution is iterative in nature and it proceeds by decomposing the original problem to a series of multiple projection subproblems \citep{lu}. 
+
+MPCA is applied to 3-D object recognition tasks \citep{sahambi} in machine vision, medical image analysis, space-time analysis of video sequences for activity recognition \citep{green} in human-computer interaction, etc.  MPCA is further extended to uncorrelated MPCA, non-negative MPCA and robust MPCA.
 
 \begin{thebibliography}{9}
 
-\bibitem[Bishop (2006)]{bishop}
+\bibitem[Bishop (2009)]{bishop}
 	Bishop, Christopher M.
 	\textit{Pattern Recognition
-	and Machine Learning.} Springer, Cambridge, U.K., 2006.
-	
+	and Machine Learning}. Springer, Cambridge, U.K., 2006.
+
+\bibitem[Shlens (2014)]{shlens}
+	Shlens, Jonathon. \textit{A Tutorial on Principal Component Analysis}.Google Research,
+	Mountain View, USA, 2014.
+
+\bibitem[Cardes (2009)]{cardes}
+ Candes, Emmanuel J.; Li, Xiaodong ; Ma, Yi; Wright,John. \textit{Robust Principal Component Analysis?} J.ACM, 58(11):1-37, 2009 
+ 
+\bibitem[Lu (2008)]{lu} Lu, Haiping; Plataniotis, Konstantinos N.; Venetsanopoulos,  
+ Anastasios N. 
+ \textit{MPCA: Multilinear Principal Component Analysis of Tensor Objects}.  IEEE Transactions on Neural Networks, 19(1):18-39, 2008
+ 
+\bibitem[Sahambi (2003)]{sahambi} 
+ Sahambi, Harkirat S.; Khorasani, Khakhayar. \textit{A neural-network appearance-based 3-D object recognition using independent component analysis} IEEE Transactions on Neural Networks, 14(1): 138-149, 2003. 
+ 
+ \bibitem[Green (2004)]{green} Green, Richard D.; Guan, Ling. \textit{Quantifying and recognizing human movement patterns from monocular video images - Part II: Applications to biometrics}. IEEE Transactions on Circuits and Systems for Video Technology, 14(2): 191-198, 2004. 
+ 	
 \end{thebibliography}
 
 \end{document}
