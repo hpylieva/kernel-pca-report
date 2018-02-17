@@ -59,16 +59,54 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3}Modifications of PCA}{4}{section.3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Robust PCA}{4}{subsection.3.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Multilinear PCA}{4}{subsection.3.2}}
-\bibcite{bishop}{{1}{2009}{{Bishop }}{{}}}
-\bibcite{shlens}{{2}{2014}{{Shlens }}{{}}}
-\bibcite{cardes}{{3}{2009}{{Cardes }}{{}}}
-\bibcite{lu}{{4}{2008}{{Lu }}{{}}}
-\bibcite{sahambi}{{5}{2003}{{Sahambi }}{{}}}
-\bibcite{green}{{6}{2004}{{Green }}{{}}}
-\bibcite{hastie}{{7}{1989}{{Hastie }}{{}}}
-\bibcite{gorban}{{8}{2007}{{Gorban }}{{}}}
+\citation{original_paper}
+\citation{bishop}
+\citation{bishop}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Nonlinear generalizations}{5}{subsection.3.3}}
 \@writefile{tdo}{\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color  {orange}o}}\ Sentence needs revision. Now kept for purpose of structuring}{5}{section*.4}}
 \pgfsyspdfmark {pgfid16}{25352416}{39670579}
 \pgfsyspdfmark {pgfid19}{37602919}{39685324}
 \pgfsyspdfmark {pgfid20}{39028327}{39416627}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Kernel Principal Component Analysis}{5}{section.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Kernel PCA. Data set in original data space (left-hand plot) and in the feature space $F$ (right-hand plot). \relax \mathversion  {bold}$v_1$ is a first principal component obtained in the feature space. Green lines indicate projection of data onto \relax \mathversion  {bold}$v_1$ \citep  {bishop}}}{5}{figure.5}}
+\newlabel{fig:kpca_bishop}{{5}{5}{Kernel PCA. Data set in original data space (left-hand plot) and in the feature space $F$ (right-hand plot). \boldmath $v_1$ is a first principal component obtained in the feature space. Green lines indicate projection of data onto \boldmath $v_1$ \citep {bishop}}{figure.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Finding kPCA}{5}{subsection.4.1}}
+\newlabel{cov_matrix}{{7}{6}{Finding kPCA}{equation.4.7}{}}
+\@writefile{tdo}{\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color  {orange}o}}\ not sure if this subsection title sounds ok}{6}{section*.5}}
+\pgfsyspdfmark {pgfid21}{5891346}{42216615}
+\pgfsyspdfmark {pgfid24}{37602919}{42231360}
+\pgfsyspdfmark {pgfid25}{39028327}{41962663}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Deriving eigenvalue equation}{6}{subsubsection.4.1.1}}
+\newlabel{eigenvector_eq}{{8}{6}{Deriving eigenvalue equation}{equation.4.8}{}}
+\@writefile{tdo}{\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color  {orange}o}}\ Don't know if alphas is clear here}{6}{section*.6}}
+\pgfsyspdfmark {pgfid26}{17271206}{29956654}
+\pgfsyspdfmark {pgfid29}{37602919}{29971399}
+\pgfsyspdfmark {pgfid30}{39028327}{29702702}
+\newlabel{eigenvector_by_alphas}{{10}{6}{Deriving eigenvalue equation}{equation.4.10}{}}
+\newlabel{big_equation}{{11}{6}{Deriving eigenvalue equation}{equation.4.11}{}}
+\newlabel{K_1}{{13}{6}{Deriving eigenvalue equation}{equation.4.13}{}}
+\newlabel{K_2}{{14}{6}{Deriving eigenvalue equation}{equation.4.14}{}}
+\@writefile{tdo}{\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color  {orange}o}}\ please check if this any sense}{6}{section*.7}}
+\pgfsyspdfmark {pgfid31}{19599806}{8633291}
+\pgfsyspdfmark {pgfid34}{37602919}{8648036}
+\pgfsyspdfmark {pgfid35}{39028327}{8379339}
+\citation{bishop}
+\citation{original_paper}
+\citation{bishop}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}Centering kernel}{7}{subsubsection.4.1.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3}Finding principal component projection}{7}{subsubsection.4.1.3}}
+\newlabel{projection_kpca}{{19}{7}{Finding principal component projection}{equation.4.19}{}}
+\@writefile{tdo}{\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color  {orange}o}}\ isn't that too detailed explanation?}{7}{section*.8}}
+\pgfsyspdfmark {pgfid36}{5891346}{11678688}
+\pgfsyspdfmark {pgfid39}{37602919}{11693433}
+\pgfsyspdfmark {pgfid40}{39028327}{11424736}
+\bibcite{bishop}{{1}{2009}{{Bishop }}{{}}}
+\bibcite{original_paper}{{2}{1998}{{Scholkopf }}{{}}}
+\bibcite{shlens}{{3}{2014}{{Shlens }}{{}}}
+\bibcite{cardes}{{4}{2009}{{Cardes }}{{}}}
+\bibcite{lu}{{5}{2008}{{Lu }}{{}}}
+\bibcite{sahambi}{{6}{2003}{{Sahambi }}{{}}}
+\bibcite{green}{{7}{2004}{{Green }}{{}}}
+\bibcite{hastie}{{8}{1989}{{Hastie }}{{}}}
+\bibcite{gorban}{{9}{2007}{{Gorban }}{{}}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Implementation of kPCA}{8}{subsection.4.2}}
