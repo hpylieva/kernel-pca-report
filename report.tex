@@ -36,6 +36,7 @@
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage{amsmath}
+\usepackage{bm}
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{natbib}
@@ -230,70 +231,72 @@ Another popular way to use PCA in case of nonlinearity is performing it in a rep
 This algorithm is called Kernel PCA and rest of the report will be devoted to it.
 
 \section{Kernel Principal Component Analysis}
-Kernel principal component analysis, or kPCA is a nonlinear generalization of PCA using techniques of kernel methods also known as ``kernel trick''. The main idea is to map the original data nonlinearly into a feature space $F$ by 
+Kernel principal component analysis, or kPCA, is a nonlinear generalization of PCA using technique of kernel methods, also known as ``kernel trick''. The main idea is to map the original data nonlinearly into a feature space $F$ by 
 \begin{equation}
 \phi: R^N \rightarrow F 
 \end{equation}
-and then perform PCA, which implicitly defines a nonlinear
-principal components in the original data space (see ~\autoref{fig:kpca_bishop}). Even if $F$ has arbitrarily large dimensionality, for certain choices of $\phi$, it is still possible to perform PCA in $F$. This is done by the use of kernel functions \citep*{original_paper}.
+and then perform PCA, which implicitly defines nonlinear
+principal components in the original data space (see ~\autoref{fig:kpca_bishop}). Even if $F$ has arbitrarily large dimensionality, for certain choices of $\phi$ it is still possible to perform PCA in $F$. This is done by use of kernel functions \citep*{original_paper}.
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.7\textwidth]{img/kpca_example_from_bishop.png}
-	\caption{\label{fig:kpca_bishop}Kernel PCA. Data set in original data space (left-hand plot) and in the feature space $F$ (right-hand plot). \boldmath$v_1$ is a first principal component obtained in the feature space. Green lines indicate projection of data onto \boldmath$v_1$ \citep{bishop}}
+	\caption{\label{fig:kpca_bishop}Kernel PCA. Data set in original data space (left-hand plot) and in the feature space $F$ (right-hand plot). \boldmath$v_1$ is a first principal component obtained in the feature space. Green lines indicate linear projections of data onto \boldmath$v_1$ \citep{bishop}}
 \end{figure}
 
 
-\subsection{Finding kPCA}
-Consider a data set $X$ containing $N$ observations of $D$ features $(D < N)$ and a nonlinear transformation $\phi(x)$ into an $M$-dimensional feature space $F$. Let's assume that projected data set is centered, so $\dfrac{1}{N}\sum_{n=1}^{N}{\phi(x_n)}=0$.
+\subsection{Algorithm explanation}\todo[color=green!40]{did't like subsection title-changed}
+Consider a data set $X$ containing $N$ observations of $D$ features $(D < N)$ and a nonlinear transformation $\phi(x)$ into an $M$-dimensional feature space $F$. For now let us assume that projected data set is centered, so $\dfrac{1}{N}\sum_{n=1}^{N}{\phi(x_n)}=0$.
 The $M \times M$ covariance matrix in feature space is given by
 \begin{equation}\label{cov_matrix}
 C =  \dfrac{1}{N}\sum_{n=1}^{N}{\phi(x_n)\phi(x_n)^T}
 \end{equation}
 
-\todo{not sure if this subsection title sounds ok}
-\subsubsection{Deriving eigenvalue equation}
+\todo[color=green!40]{changed a little}
+\subsubsection{Eigenvalue equation derivation}
 We need to solve the following eigenvalue problem
 \begin{equation}\label{eigenvector_eq}
 Cv_i = \lambda_i v_i
 \end{equation}
-$i=1,...,M$. Our goal is to solve this equation without working directly in the feature space. Substituting $C$ using (\ref{cov_matrix}) we get
+$i=1,...,M$. Our goal is to solve this equation without working directly in the feature space.\todo[color=green!40]{need to explain why we have such goal} Substituting $C$ from (\ref{cov_matrix}) we get
 \begin{equation}
 \dfrac{1}{N}\sum_{n=1}^{N}{\phi(x_n)\{\phi(x_n)^Tv_i\}} = \lambda_i v_i
 \end{equation}
 
-Provided $\lambda_i > 0$, the vector $v_i$ is given by a linear combination of the $\phi(x_n)$ and there exist coefficients $\alpha_1,...,\alpha_N$ such that \todo{Don't know if alphas is clear here}
+Provided $\lambda_i > 0$, the vector $v_i$ is given by a linear combination of the $\phi(x_n)$ and so:
 \begin{equation}\label{eigenvector_by_alphas}
-v_i = \sum_{n=1}^{N}{\alpha_{in}\phi(x_n)^T}
+\forall i \exists \\  \alpha_1,...,\alpha_N  \\ (\sum_{n=1}^{N}\lvert\alpha_in\rvert\neq 0): \\
+v_i = \sum_{n=1}^{N}{\alpha_{in}\phi(x_n)}
 \end{equation}
 
-Substituting (\ref{cov_matrix}) and (\ref{eigenvector_by_alphas}) into (\ref{eigenvector_eq}) we obtain
+Substituting this expansion back into the eigenvector equation, {much pain was here.. changed 3 references} we obtain
 \begin{equation}\label{big_equation}
 \dfrac{1}{N}\sum_{n=1}^{N}{\phi(x_n)\phi(x_n)^T} \sum_{m=1}^{N}{\alpha_{im}\phi(x_m)^T} = \lambda_i \sum_{n=1}^{N}{\alpha_{in}\phi(x_n)^T}
 \end{equation}
 
-Key thing here is to express (\ref{big_equation}) in terms of kernel function $k(x_n, x_m) = \phi(x_n)^T\phi(x_m)$, which we do by multiplying both sides by $\phi(x_l)^T$.
+The key thing here is to express last equation\todo[color = green!40]{got rid of reference, redundant here} in terms of kernel function defined as $k(x_n, x_m) = \phi(x_n)^T\phi(x_m)$. It is done by multiplying both sides by $\phi(x_l)^T$ which results to the next:
 
 \begin{equation}
 \dfrac{1}{N}\sum_{n=1}^{N}{k(x_l, x_m)} \sum_{m=1}^{N}{\alpha_{im}k(x_n, x_m)} = \lambda_i \sum_{n=1}^{N}{\alpha_{in}k(x_l, x_m)}
 \end{equation}
 or in matrix notation
 \begin{equation}\label{K_1}
-K^2\alpha_i = \lambda_iNK\alpha_i
+K^2 \bm{\alpha_i} = \lambda_i N K \bm{\alpha_i}
 \end{equation}
 If we remove a factor of K from both sides we obtain following eigenvalue problem
 \begin{equation}\label{K_2}
-K\alpha_i = \lambda_iN\alpha_i
+K \bm{\alpha_i} = \lambda_i N \bm{\alpha_i}
 \end{equation}
 
-We can find $\alpha_i$ by solving this eigenvalue problem. Note that solutions of (\ref{K_1}) and (\ref{K_2}) differ only by eigenvectors that correspond to zero eigenvalues of K, hence removing $K$ from both sides of (\ref{K_1}) does not affect principal components.  
+By solving the problem we find eigenvectors $\bm{\alpha_i}$. \todo[color = green!40]{this sentence can be removed as doesn't ass much value to concept}Note that solutions of (\ref{K_1}) and (\ref{K_2}) differ only by eigenvectors that correspond to zero eigenvalues of K, hence removing $K$ from both sides of (\ref{K_1}) does not affect principal components.  
 
-The eigenvectors need to be orthonormal \todo{please check if this  any sense} in feature space, thus $\alpha_i$ needs to be normalized. Using (\ref{eigenvector_by_alphas}) and (\ref{K_2}), we get
+\todo[color = green!40]{the part needs further discussion}
+The eigenvectors need to be orthonormal in feature space, thus $\alpha_i$ needs to be normalized. Using (\ref{eigenvector_by_alphas}) and (\ref{K_2}), we get
 \begin{equation}
 1 = v_i^Tv_i = \sum_{n=1}^{N}\sum_{m=1}^{N}{\alpha_{in}\alpha_{im}\phi(x_n)^T\phi(x_m)} = \alpha_i^TK\alpha_i = \alpha_i^T\lambda_iN\alpha_i = \lambda_iN\alpha_i^T\alpha_i
 \end{equation}
 
-\subsubsection{Centering kernel}
+\subsubsection{Kernel centering}
 So far, we assumed that projected data set has zero mean. But in general it will not be the case. The standard way to centralize data set is to compute mean and then subtract it from every data point.
 Here we wish to avoid working in feature space and express everything in terms of kernel function. Let's denote projected data set after centering as $\widetilde{\phi}(x_n)$.
 
@@ -337,7 +340,7 @@ Main steps of kPCA algorithm:
 	\item Solve an eigenvalue problem $\widetilde{K}\alpha_i = \lambda_i\alpha_i$;
 	\item Compute projections of any point $x$ onto eigenvectors (principal components);
 \end{enumerate}
-We are so cute that we managed to implement kPCA by ourselves. \href{https://github.com/Irynei/KernelPCA}{Here} you can find source code.
+We are so cute that we managed to implement kPCA by ourselves. You can find the source code \href{https://github.com/Irynei/KernelPCA}{here}.
 
 \begin{thebibliography}{9}
 
@@ -352,7 +355,7 @@ B. Scholkopf, A. Smola, and K.-R. Muller.
  Shlens, Jonathon. \textit{A Tutorial on Principal Component Analysis}.Google Research, Mountain View, USA, 2014.
 
 \bibitem[Cardes (2009)]{cardes}
- Candes, Emmanuel J.; Li, Xiaodong ; Ma, Yi; Wright,John. \textit{Robust Principal Component Analysis?} J.ACM, 58(11):1-37, 2009 
+ Candes, Emmanuel J.; Li, Xiaodong ; Ma, Yi; Wright, John. \textit{Robust Principal Component Analysis?} J.ACM, 58(11):1-37, 2009 
  
 \bibitem[Lu (2008)]{lu} Lu, Haiping; Plataniotis, Konstantinos N.; Venetsanopoulos,  
  Anastasios N. 
