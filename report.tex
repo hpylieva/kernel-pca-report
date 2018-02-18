@@ -97,24 +97,14 @@ Irynei \textsc{Baran}\\Hanna \textsc{Pylieva}\\[1cm] % Your name
 
 
 \begin{abstract}
-\todo{revise Abstract after finishing}
 Principal component analysis (PCA) is a
 popular tool for linear dimensionality reduction
 and feature extraction. Kernel PCA
 is the nonlinear form of PCA, which better
 exploits the complicated spatial structure of
-high-dimensional features. In this project, we
-first review the basic ideas of PCA and kernel
-PCA. Then we show some experimental
-results to compare the performance
-of kernel PCA and standard PCA for classification
-problems. We also provide an overview of PCA and kPCA applications.
+high-dimensional features. In this project, we review the basic ideas of PCA, identify its limitations and possible modifications. Then we concentrate on one important extension of PCA - kernel
+PCA. We give the detailed explanation of the latter, followed by step-by-step instructions of the algorithm's implementation.  We also provide the source code of kPCA developed by ourselves with comparison of its performance against linear PCA. Finally, we briefly specify the possible applications of kPCA and discuss the method's pros and cons.
 \end{abstract}
-
-\section{Introduction}
-\todo{rewrite the introduction}
-In this section, we briefly review the principal component
-analysis method, it's applications and limitations.
 
 \section{Principal Component Analysis}
 Principal component analysis, or PCA, is a mathematical procedure which is widely used for dimensionality reduction and feature selection. Those applications are achieved by projecting the data orthogonally onto a linear space with lower dimension, known as the principal subspace or feature space, such that the variance of projected data is maximal \citep*{bishop}.
@@ -129,11 +119,15 @@ Consider a data set $X$ containing $N$ observations of $D$ features ($D<N$). In 
 
 \subsection{Finding principal components}
 To begin with, consider the projection on $M$ when $dim(M)=1$. Let a unit vector $u_1 \in D$ be the direction of $M$. Then projection of an observation $x_n\in X$ onto $M$ is $u_1^Tx_n$ and the variance of projected data is
+
 \begin{equation}\label{var_proj}
  \dfrac{1}{N}\sum_{n=1}^{N}{\{u_1^T x_n - u_1^T \bar{x}\}}=u_1^T S u_1
 \end{equation}	 
-\todo{do we need to provide formula of covariance matrix explicitly? I don't feel so..}
-where $\bar{x} = \frac{1}{N}\sum_{n=1}^{N} x_i$ is the mean of sample set and $S$ is the covariance matrix of data set $X$.
+%
+where $\bar{x} = \frac{1}{N}\sum_{n=1}^{N} x_i$ is the mean of sample set and $S$ is the covariance matrix of data set $X$:
+\begin{equation}\label{cov_matrix_s}
+S =  \dfrac{1}{N}\sum_{n=1}^{N}{(x_n - \bar{x})(x_n - \bar{x})^T}
+\end{equation}
 
 Maximization of \eqref{var_proj} is kept in a unit circle as we chose $u_1$ s.t. $||u_1||=u_1^T u_1=1$. So we need to find maximum of the next Lagrange function:
 \begin{equation}
@@ -163,14 +157,14 @@ Although PCA is very useful from practical prospective it has some limitations.
 	
 	\begin{figure}[h]
 		\centering
-		\includegraphics[scale=0.5]{img/pca-linear-separation-demo.png}
+		\includegraphics[scale=0.4]{img/pca-linear-separation-demo.png}
 		\caption{\label{fig:pca-cons-demo-1}Demonstration of PCA's low performance for non-linearly dependent data}
 	\end{figure}
 	
 	\item Spread maximization. 
 	PCA searches for a subspace where projected data has the maximal spread. However, this is not always the best way to represent data in lower-dimension subspace. A common example is the task of separating and counting pancakes from an image (see ~\autoref{fig:pca-cons-demo-2}). Important information for the task (number of pancakes) is located along Z axis which has the lowest variance. So Z axis will be the last principal component identified by PCA which is not what required. 
 	
-	\begin{figure}
+	\begin{figure}[h]
 		\centering
 		\includegraphics[width=.5\textwidth, scale=0.4]{img/pancakes-white.png}
 		\caption{\label{fig:pca-cons-demo-2}Image from  \href{http://golancourses.net/2014/kevan/01/23/3d-parametric-pancakes/}{3D Parametric Pancakes}
@@ -219,16 +213,14 @@ RPCA allows to recover a low-rank matrix $L_0$ from highly corrupted measurement
 \subsection{Multilinear PCA}
 Suppose we need to reduce dimensionality not of a simple matrix $M \in R^2$ but of a n-way array, i.e. a cube or hyper-cube of numbers, also informally referred to as a "data tensor". Common examples of tensor are 2-D/3-D images and video sequences. To deal with tensors PCA is generalized to multilinear PCA (MPCA). MPCA performs feature extraction by determining a multilinear projection that captures most of the original tensorial input variation. The solution is iterative in nature and it proceeds by decomposing the original problem to a series of multiple projection subproblems \citep{lu}. 
 
-MPCA is applied to 3-D object recognition tasks \citep{sahambi} in machine vision, medical image analysis, space-time analysis of video sequences for activity recognition \citep{green} in human-computer interaction, etc.  MPCA is further extended to uncorrelated MPCA, non-negative MPCA and robust MPCA.
+MPCA is applied to 3-D object recognition tasks in machine vision, medical image analysis, space-time analysis of video sequences for activity recognition in human-computer interaction, etc.  MPCA is further extended to uncorrelated MPCA, non-negative MPCA and robust MPCA.
 
 \subsection{Nonlinear generalizations}
 In real-world problems we often need to work with non-linear dependencies between features in data. For such tasks Hastie and Stuetzle \citep{hastie} proposed bending the loading
 vectors to produce curves that approximate the nonlinear relationship between
 a set of two variables. Such curves are called principal curves, their multidimensional extensions produce principal surfaces or principal manifolds \citep{gorban}.
 
-Another popular way to use PCA in case of nonlinearity is performing it in a reproducing kernel Hilbert space associated with a positive definite kernel. 
-\todo{Sentence needs revision. Now kept for purpose of structuring}
-This algorithm is called Kernel PCA and rest of the report will be devoted to it.
+Another popular way to use PCA in case of nonlinearity is kernel PCA and rest of the report will be devoted to it.
 
 \section{Kernel Principal Component Analysis}
 Kernel principal component analysis, or kPCA, is a nonlinear generalization of PCA using technique of kernel methods, also known as ``kernel trick''. The main idea is to map the original data nonlinearly into a feature space $F$ by 
@@ -245,56 +237,53 @@ principal components in the original data space (see ~\autoref{fig:kpca_bishop})
 \end{figure}
 
 
-\subsection{Algorithm explanation}\todo[color=green!40]{did't like subsection title-changed}
+\subsection{Algorithm explanation}
 Consider a data set $X$ containing $N$ observations of $D$ features $(D < N)$ and a nonlinear transformation $\phi(x)$ into an $M$-dimensional feature space $F$. For now let us assume that projected data set is centered, so $\dfrac{1}{N}\sum_{n=1}^{N}{\phi(x_n)}=0$.
 The $M \times M$ covariance matrix in feature space is given by
 \begin{equation}\label{cov_matrix}
 C =  \dfrac{1}{N}\sum_{n=1}^{N}{\phi(x_n)\phi(x_n)^T}
 \end{equation}
 
-\todo[color=green!40]{changed a little}
 \subsubsection{Eigenvalue equation derivation}
 We need to solve the following eigenvalue problem
+
 \begin{equation}\label{eigenvector_eq}
-Cv_i = \lambda_i v_i
+C \bm{v}_i = \lambda_i \bm{v}_i
 \end{equation}
-$i=1,...,M$. Our goal is to solve this equation without working directly in the feature space.\todo[color=green!40]{need to explain why we have such goal} Substituting $C$ from (\ref{cov_matrix}) we get
+%
+$i=1,...,M$. Our goal is to solve this equation without working directly in the feature space as due to its size this will be computationally inefficient. Substituting $C$ from (\ref{cov_matrix}) we get
+%
 \begin{equation}
-\dfrac{1}{N}\sum_{n=1}^{N}{\phi(x_n)\{\phi(x_n)^Tv_i\}} = \lambda_i v_i
+\dfrac{1} {N} \sum_{n=1}^{N} {\phi(x_n)\{\phi(x_n)^T \bm{v}_i\}} = \lambda_i \bm{v}_i
 \end{equation}
 
-Provided $\lambda_i > 0$, the vector $v_i$ is given by a linear combination of the $\phi(x_n)$ and so:
+Provided $\lambda_i > 0$, the vector $v_i$ is given by a linear combination of the $\phi(x_n)$ and so $\forall\ i \ \exists$ column vector $\bm{\alpha}_i \in R^N$  such that:
+
 \begin{equation}\label{eigenvector_by_alphas}
-\forall i \exists \\  \alpha_1,...,\alpha_N  \\ (\sum_{n=1}^{N}\lvert\alpha_in\rvert\neq 0): \\
-v_i = \sum_{n=1}^{N}{\alpha_{in}\phi(x_n)}
+ \ v_i = \sum_{n=1}^{N}{\alpha_{in}\phi(x_n)}
 \end{equation}
 
-Substituting this expansion back into the eigenvector equation, {much pain was here.. changed 3 references} we obtain
+Substituting \eqref{cov_matrix} and \eqref{eigenvector_by_alphas} into \eqref{eigenvector_eq}, we obtain
+
 \begin{equation}\label{big_equation}
 \dfrac{1}{N}\sum_{n=1}^{N}{\phi(x_n)\phi(x_n)^T} \sum_{m=1}^{N}{\alpha_{im}\phi(x_m)^T} = \lambda_i \sum_{n=1}^{N}{\alpha_{in}\phi(x_n)^T}
 \end{equation}
 
-The key thing here is to express last equation\todo[color = green!40]{got rid of reference, redundant here} in terms of kernel function defined as $k(x_n, x_m) = \phi(x_n)^T\phi(x_m)$. It is done by multiplying both sides by $\phi(x_l)^T$ which results to the next:
+The key thing here is to express last equation in terms of kernel function defined as $k(x_n, x_m) = \phi(x_n)^T\phi(x_m)$. It is done by multiplying both sides by $\phi(x_l)^T$ which results to the next:
 
 \begin{equation}
 \dfrac{1}{N}\sum_{n=1}^{N}{k(x_l, x_m)} \sum_{m=1}^{N}{\alpha_{im}k(x_n, x_m)} = \lambda_i \sum_{n=1}^{N}{\alpha_{in}k(x_l, x_m)}
 \end{equation}
 or in matrix notation
 \begin{equation}\label{K_1}
-K^2 \bm{\alpha_i} = \lambda_i N K \bm{\alpha_i}
+K^2 \bm{\alpha}_i = \lambda_i N K \bm{\alpha}_i
 \end{equation}
 If we remove a factor of K from both sides we obtain following eigenvalue problem
 \begin{equation}\label{K_2}
-K \bm{\alpha_i} = \lambda_i N \bm{\alpha_i}
+K \bm{\alpha}_i = \lambda_i N \bm{\alpha}_i
 \end{equation}
 
-By solving the problem we find eigenvectors $\bm{\alpha_i}$. \todo[color = green!40]{this sentence can be removed as doesn't ass much value to concept}Note that solutions of (\ref{K_1}) and (\ref{K_2}) differ only by eigenvectors that correspond to zero eigenvalues of K, hence removing $K$ from both sides of (\ref{K_1}) does not affect principal components.  
-
-\todo[color = green!40]{the part needs further discussion}
-The eigenvectors need to be orthonormal in feature space, thus $\alpha_i$ needs to be normalized. Using (\ref{eigenvector_by_alphas}) and (\ref{K_2}), we get
-\begin{equation}
-1 = v_i^Tv_i = \sum_{n=1}^{N}\sum_{m=1}^{N}{\alpha_{in}\alpha_{im}\phi(x_n)^T\phi(x_m)} = \alpha_i^TK\alpha_i = \alpha_i^T\lambda_iN\alpha_i = \lambda_iN\alpha_i^T\alpha_i
-\end{equation}
+By solving the problem we find eigenvectors $\bm{\alpha}_i$. Note that solutions of (\ref{K_1}) and (\ref{K_2}) differ only by eigenvectors that correspond to zero eigenvalues of K, hence removing $K$ from both sides of (\ref{K_1}) does not affect principal components.  
 
 \subsubsection{Kernel centering}
 So far, we assumed that projected data set has zero mean. But in general it will not be the case. The standard way to centralize data set is to compute mean and then subtract it from every data point.
@@ -319,37 +308,85 @@ or in a matrix notation
 where $\widetilde{K}$ is centered kernel matrix, $1_N$ is $N \times N$ matrix in which every element equals to $\dfrac{1}{N}$ \citep{bishop}.
 So, we are able to evaluate $\widetilde{K}$ using only kernel function.
 \subsubsection{Finding principal component projection}
-After solving the eigenvalue problem $\widetilde{K}\alpha_i = \lambda_i\alpha_i$, we can find projection onto principal components in terms of the kernel function.
+After solving the eigenvalue problem 
+$\widetilde{K}\bm{\alpha}_i = \lambda_i N \bm{\alpha}_i$, 
+we can find projection onto principal components in terms of the kernel function.
 Using (\ref{eigenvector_by_alphas}), projection of a point $x$ onto eigenvector $i$ is given by
 \begin{equation}\label{projection_kpca}
-\phi(x)^Tv_i = \sum_{n=1}^{N}{\alpha_{in}\phi(x)^T\phi(x_n)} = \sum_{n=1}^{N}{\alpha_{in}k(x, x_n)}
+\phi(x)^T \bm{v}_i = \sum_{n=1}^{N}{\alpha_{in}\phi(x)^T\phi(x_n)} = \sum_{n=1}^{N}{\alpha_{in}k(x, x_n)}
 \end{equation}
 
-Note that neither (\ref{eigenvector_eq})  nor (\ref{projection_kpca}) requires the $\phi(x)$ in explicit form, they are only needed in dot products. Therefore, we are able to use kernel functions for computing these dot products without actually performing the map $\phi$ \citep{original_paper}. 
+Note that neither (\ref{eigenvector_eq})  nor (\ref{projection_kpca}) requires the $\phi(x)$ in explicit form, we only need their dot product to use kernel function without actually performing the map $\phi$ \citep{original_paper}. 
 
-\todo{isn't that too detailed explanation?}
-In the original $D$-dimentional data space there are $D$ orthogonal eigenvectors and therefore we can find at most D principal components. The dimensionality $M$ of the feature space can be really large and even infinite, and thus it seems possible to find more than $D$ principal components. However, number of nonzero eigenvalues cannot exceed the number of observations $N$, because
-the covariance matrix in feature space has rank at most $N$. So, kernel PCA leads to eigenvector expansion of the $N \times N$ kernel matrix $K$ \citep{bishop}.
+Note that the number of nonzero eigenvalues cannot exceed the number of observations $N$, because
+the $M \times M$ covariance matrix in feature space has rank at most $N$ ($N<M$). So, kPCA leads to eigenvector expansion of the $N \times N$ kernel matrix $K$ \citep{bishop}.
 
+\pagebreak
 \subsection{Implementation of kPCA}
 Main steps of kPCA algorithm:
 \begin{enumerate}
 	\item Pick up a kernel function;
 	\item Construct $M \times M$ dot product kernel matrix $K$ of original data set;
-	\item Compute centered kernel matrix $\widetilde{K} = K - 1_NK - K1_N + 1_NK1_N$;
-	\item Solve an eigenvalue problem $\widetilde{K}\alpha_i = \lambda_i\alpha_i$;
+	\item Compute centered kernel matrix $\widetilde{K} = K - 1_N K - K 1_N + 1_N K 1_N$;	\item Solve an eigenvalue problem $\widetilde{K} \bm{\alpha}_i = \lambda_i N \bm{\alpha}_i$;
 	\item Compute projections of any point $x$ onto eigenvectors (principal components);
 \end{enumerate}
-We are so cute that we managed to implement kPCA by ourselves. You can find the source code \href{https://github.com/Irynei/KernelPCA}{here}.
+We managed to implement kPCA by ourselves. The source code can be found \href{https://github.com/Irynei/KernelPCA}{here}.
+
+\subsection{Examples of kPCA performance}
+Here we want to demonstrate kPCA performance on specific examples.
+
+Consider three centric clouds of points on plane (left-hand plot on ~\autoref{fig:three-centric-circles-2d}). Colors of the points are not known to algorithms and used merely for visualization purposes. As we can see the data is not linearly separable, so standard PCA won't work. Let's now map the data on higher dimension using the (Gaussian) radial basis function kernel, or RBF kernel, defined as
+
+\begin{equation}
+	k({x},{y})=e^{{\frac  {-||{x}-{y}||^{2}}{2\sigma ^{2}}}}
+\end{equation}
+%
+
+As a result in 3-D we obtain a representation as on right-hand plot of ~\autoref{fig:three-centric-circles-2d}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.35]
+	{img/demo-kpca-1.png}
+	\caption{\label{fig:three-centric-circles-2d}Three concentric clouds of points on 2-D and 3-D}
+\end{figure}
+
+We can see that in 3-D the points are linearly separable by a hyperplane. This is exactly what kPCA does.
+
+The result of applying kPCA to the initial data set can be seen on left-hand plot of ~\autoref{fig:compare-kpca-pca}. What noticeable is that we can pick out three groups of data merely along the first principal component produced by kPCA.  Whereas linear PCA (right-hand plot on ~\autoref{fig:compare-kpca-pca}) operates only in the given (in our case 2-D) space, in which the concentric point clouds are not linearly separable.
+
+The described capabilities of kernel PCA make it widely applicable in novelty detection \citep{hoffman} and image de-noising \citep{mika}.
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.35]
+	{img/demo-kpca-2.png}
+	\caption{\label{fig:compare-kpca-pca}Comparison of applying PCA and kPCA to three concentric clouds of points}
+\end{figure}
+
+\subsection{Pros and cons of kPCA}
+Kernel PCA has the next advantages:
+
+\begin{itemize}
+	\item able to separate data in nonlinear case;
+	\item as PCA, kPCA is an unsupervised method, so the number of principal components does not need to be specified in advance.
+\end{itemize}
+On the other hand, kPCA has the next drawbacks:
+
+\begin{itemize}
+	\item the kernel matrix $K$ is $N \times N$, so in case of big $N$ storing K will be a problem and finding eigenvalues/eigenvectors will be a computationally complex operation. 
+	\item as PCA, kPCA is still vulnerable to such issues as outliers, noise and missing data.
+\end{itemize}
+
+
+\section{Summary}
+In this project we have studied principal component analysis in details, discussed the areas of its application. We have identified the limitations of linear PCA and its possible modifications to overcome them. Then represented a comprehensive explanation of kernel PCA which extends PCA to non-linearly dependent input data. 
 
 \begin{thebibliography}{9}
 
 \bibitem[Bishop (2009)]{bishop}
  Bishop, Christopher M.\textit{Pattern Recognition and Machine Learning}. Springer, Cambridge, U.K., 2006.
- 
-\bibitem[Scholkopf (1998)]{original_paper}
-B. Scholkopf, A. Smola, and K.-R. Muller.
-\textit{Nonlinear component analysis as a kernel eigenvalue problem.}  Berlin, Germany., 1998.
 
 \bibitem[Shlens (2014)]{shlens}
  Shlens, Jonathon. \textit{A Tutorial on Principal Component Analysis}.Google Research, Mountain View, USA, 2014.
@@ -361,17 +398,21 @@ B. Scholkopf, A. Smola, and K.-R. Muller.
  Anastasios N. 
  \textit{MPCA: Multilinear Principal Component Analysis of Tensor Objects}.  IEEE Transactions on Neural Networks, 19(1):18-39, 2008
  
-\bibitem[Sahambi (2003)]{sahambi} 
- Sahambi, Harkirat S.; Khorasani, Khakhayar. \textit{A neural-network appearance-based 3-D object recognition using independent component analysis} IEEE Transactions on Neural Networks, 14(1): 138-149, 2003. 
- 
-\bibitem[Green (2004)]{green} 
- Green, Richard D.; Guan, Ling. \textit{Quantifying and recognizing human movement patterns from monocular video images - Part II: Applications to biometrics}. IEEE Transactions on Circuits and Systems for Video Technology, 14(2): 191-198, 2004. 
- 
 \bibitem[Hastie (1989)]{hastie}
  Hastie, Trevor; Stuetzle, Werner. \textit{Principal Curves}. Journal of the American Statistical Association, 84(406): 502-516, 1989.
 
 \bibitem[Gorban (2007)]{gorban}
  Gorban,  Alexander N.; Kegl, Balazs; Wunsch, Donald C.; Zinovyev, Andrei. \textit{Principal Manifolds for Data Visualisation and Dimension Reduction}. Springer, Berlin – Heidelberg – New York, 2007. 
+
+\bibitem[Scholkopf (1998)]{original_paper}
+Scholkopf, Bernhard; Smola, Alex; Muller, Klaus-Robert.
+\textit{Nonlinear component analysis as a kernel eigenvalue problem.}  Berlin, Germany., 1998.
+
+\bibitem[Hoffman (2007)]{hoffman}
+Hoffmann, Heiko.\textit{ Kernel PCA for Novelty Detection}. Pattern Recognition, 40: 863-874, 2007.
+ 
+\bibitem[Mika (1999)]{mika}
+Mika, Sebastian; Scholkopf, Bernhard. \textit{Kernel PCA and De-Noising in Feature Spaces}. NIPS, 1999.
 \end{thebibliography}
 
 \end{document}

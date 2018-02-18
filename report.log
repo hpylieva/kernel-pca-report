@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.15)  17 FEB 2018 23:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.15)  18 FEB 2018 18:12
 entering extended mode
 **./report.tex
 (report.tex
@@ -719,7 +719,7 @@ LaTeX Info: Redefining \nameref on input line 46.
 \openout4 = `report.out'.
 
 
-<img/UCU-Apps.png, id=62, 2209.50468pt x 980.91469pt>
+<img/UCU-Apps.png, id=70, 2209.50468pt x 980.91469pt>
 File: img/UCU-Apps.png Graphic file (type png)
  <use img/UCU-Apps.png>
 Package pdftex.def Info: img/UCU-Apps.png used on input line 90.
@@ -728,199 +728,112 @@ Package pdftex.def Info: img/UCU-Apps.png used on input line 90.
 [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <./img/UCU-Apps.png>]
-Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 100.
-
-Overfull \hbox (1.1691pt too wide) in paragraph at lines 115--115
-[][][][]\OT1/cmr/m/n/12 rewrite 
- []
-
-
-Overfull \hbox (1.1691pt too wide) in paragraph at lines 115--115
-[][][][]\OT1/cmr/m/n/12 rewrite 
- []
-
-
-Overfull \hbox (1.1691pt too wide) in paragraph at lines 115--115
-[][][][]\OT1/cmr/m/n/12 rewrite 
- []
-
-
-Overfull \hbox (1.1691pt too wide) in paragraph at lines 115--115
-[][][][]\OT1/cmr/m/n/12 rewrite 
- []
-
-
-<img/geometric-PCA-8-both-components-with-plane.png, id=76, 575.0283pt x 493.36
+<img/geometric-PCA-8-both-components-with-plane.png, id=84, 575.0283pt x 493.36
 32pt>
 File: img/geometric-PCA-8-both-components-with-plane.png Graphic file (type png
 )
  <use img/geometric-PCA-8-both-components-with-plane.png>
 Package pdftex.def Info: img/geometric-PCA-8-both-components-with-plane.png use
-d on input line 126.
+d on input line 116.
 (pdftex.def)             Requested size: 172.50981pt x 148.0101pt.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.134 \end{equation}
+l.125 \end{equation}
                      [1 <./img/geometric-PCA-8-both-components-with-plane.png>]
-<img/pca-linear-separation-demo.png, id=96, 952.0368pt x 218.2554pt>
+<img/pca-linear-separation-demo.png, id=102, 952.0368pt x 218.2554pt>
 File: img/pca-linear-separation-demo.png Graphic file (type png)
 
 <use img/pca-linear-separation-demo.png>
 Package pdftex.def Info: img/pca-linear-separation-demo.png used on input line 
-166.
-(pdftex.def)             Requested size: 476.01723pt x 109.12743pt.
-
-Overfull \hbox (6.2622pt too wide) in paragraph at lines 166--167
- [][] 
- []
-
-[2 <./img/pca-linear-separation-demo.png>]
-<img/pancakes-white.png, id=111, 403.0192pt x 311.86784pt>
+160.
+(pdftex.def)             Requested size: 380.80797pt x 87.3006pt.
+ [2 <./img/pca-linear-separation-demo.png>] <img/pancakes-white.png, id=117, 40
+3.0192pt x 311.86784pt>
 File: img/pancakes-white.png Graphic file (type png)
 
 <use img/pancakes-white.png>
-Package pdftex.def Info: img/pancakes-white.png used on input line 175.
+Package pdftex.def Info: img/pancakes-white.png used on input line 169.
 (pdftex.def)             Requested size: 161.20482pt x 124.74492pt.
 
-<img/non-orthogonal-components.png, id=114, 654.7662pt x 244.7544pt>
+<img/non-orthogonal-components.png, id=120, 654.7662pt x 244.7544pt>
 File: img/non-orthogonal-components.png Graphic file (type png)
 
 <use img/non-orthogonal-components.png>
 Package pdftex.def Info: img/non-orthogonal-components.png used on input line 1
-88.
+82.
 (pdftex.def)             Requested size: 327.3823pt x 122.37689pt.
  [3 <./img/pancakes-white.png> <./img/non-orthogonal-components.png>] [4]
-Overfull \hbox (9.9815pt too wide) in paragraph at lines 230--230
-[][][][]\OT1/cmr/m/n/12 Sentence 
- []
-
-
-Overfull \hbox (9.9815pt too wide) in paragraph at lines 230--230
-[][][][]\OT1/cmr/m/n/12 Sentence 
- []
-
-
-Overfull \hbox (9.9815pt too wide) in paragraph at lines 230--230
-[][][][]\OT1/cmr/m/n/12 Sentence 
- []
-
-
-Overfull \hbox (9.9815pt too wide) in paragraph at lines 230--230
-[][][][]\OT1/cmr/m/n/12 Sentence 
- []
-
-<img/kpca_example_from_bishop.png, id=162, 57.816pt x 28.54665pt>
+<img/kpca_example_from_bishop.png, id=161, 57.816pt x 28.54665pt>
 File: img/kpca_example_from_bishop.png Graphic file (type png)
 
 <use img/kpca_example_from_bishop.png>
-Package pdftex.def Info: img/kpca_example_from_bishop.png used on input line 24
-3.
+Package pdftex.def Info: img/kpca_example_from_bishop.png used on input line 23
+5.
 (pdftex.def)             Requested size: 328.82707pt x 162.36732pt.
+ [5 <./img/kpca_example_from_bishop.png (PNG copy)>] [6] [7] <img/demo-kpca-1.p
+ng, id=217, 1248.16313pt x 499.11469pt>
+File: img/demo-kpca-1.png Graphic file (type png)
 
-Overfull \hbox (6.71765pt too wide) in paragraph at lines 248--248
-\OT1/cmr/m/n/12 changed  
- []
+<use img/demo-kpca-1.png>
+Package pdftex.def Info: img/demo-kpca-1.png used on input line 350.
+(pdftex.def)             Requested size: 436.86365pt x 174.69275pt.
+ [8 <./img/demo-kpca-1.png>]
+<img/demo-kpca-2.png, id=239, 1188.69093pt x 527.72156pt>
+File: img/demo-kpca-2.png Graphic file (type png)
 
+<use img/demo-kpca-2.png>
+Package pdftex.def Info: img/demo-kpca-2.png used on input line 364.
+(pdftex.def)             Requested size: 416.04807pt x 184.7053pt.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 372.
 
-Overfull \hbox (6.71765pt too wide) in paragraph at lines 248--248
-\OT1/cmr/m/n/12 changed  
- []
-
-
-Overfull \hbox (6.71765pt too wide) in paragraph at lines 248--248
-\OT1/cmr/m/n/12 changed  
- []
-
-
-Overfull \hbox (6.71765pt too wide) in paragraph at lines 248--248
-\OT1/cmr/m/n/12 changed  
- []
-
-[5 <./img/kpca_example_from_bishop.png (PNG copy)>]
-Overfull \hbox (6.71765pt too wide) in paragraph at lines 255--255
-[][][][]\OT1/cmr/m/n/12 changed 
- []
-
-
-Overfull \hbox (6.71765pt too wide) in paragraph at lines 255--255
-[][][][]\OT1/cmr/m/n/12 changed 
- []
-
-
-Overfull \hbox (6.71765pt too wide) in paragraph at lines 255--255
-[][][][]\OT1/cmr/m/n/12 changed 
- []
-
-
-Overfull \hbox (6.71765pt too wide) in paragraph at lines 255--255
-[][][][]\OT1/cmr/m/n/12 changed 
- []
-
-
-Overfull \hbox (2.21353pt too wide) in paragraph at lines 291--291
-\OT1/cmr/m/n/12 doesn't 
- []
-
-
-Overfull \hbox (2.21353pt too wide) in paragraph at lines 291--291
-\OT1/cmr/m/n/12 doesn't 
- []
-
-
-Overfull \hbox (2.21353pt too wide) in paragraph at lines 291--291
-\OT1/cmr/m/n/12 doesn't 
- []
-
-
-Overfull \hbox (2.21353pt too wide) in paragraph at lines 291--291
-\OT1/cmr/m/n/12 doesn't 
- []
-
-
-LaTeX Warning: Marginpar on page 6 moved.
-
-[6] [7] ("C:\Program Files\MiKTeX 2.9\tex\latex\ucs\uni-32.def"
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 372.
+ [9 <./img/demo-kpca-2.png>]
+("C:\Program Files\MiKTeX 2.9\tex\latex\ucs\uni-32.def"
 File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
-) [8]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 377.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 377.
-
-(report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 377.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 377.
+) [10]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 418.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 418.
+ (report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 418.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 418.
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: B5E130013506C9C3CF103E2F6CBF1AC6;1006.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 377.
+(rerunfilecheck)             Checksum: 2F5D6DA728E18FA4EA368A2E1260DB7E;1152.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 418.
  ) 
 Here is how much of TeX's memory you used:
- 18151 strings out of 493323
- 333537 string characters out of 3139065
- 456676 words of memory out of 3000000
- 21268 multiletter control sequences out of 15000+200000
+ 18022 strings out of 493323
+ 330451 string characters out of 3139065
+ 418164 words of memory out of 3000000
+ 21138 multiletter control sequences out of 15000+200000
  17353 words of font info for 60 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,9n,76p,630b,927s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 62i,8n,56p,630b,501s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Fi
 les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Program Files/MiKTe
 X 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program Files/MiKTeX 2.9/f
 onts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
 e1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmmib10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cmext
-ra/cmmib8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10
-.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/
-Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program F
-iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmti12.pfb>
-Output written on report.pdf (9 pages, 1121253 bytes).
+c/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi
+b10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><
+C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Progra
+m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmsy6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12
+.pfb>
+Output written on report.pdf (11 pages, 1725020 bytes).
 PDF statistics:
- 305 PDF objects out of 1000 (max. 8388607)
- 81 named destinations out of 1000 (max. 500000)
- 155 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 327 PDF objects out of 1000 (max. 8388607)
+ 77 named destinations out of 1000 (max. 500000)
+ 181 words of extra memory for PDF output out of 10000 (max. 10000000)
 
