@@ -290,7 +290,7 @@ So far, we assumed that projected data set has zero mean. But in general it will
 Here we wish to avoid working in feature space and express everything in terms of kernel function. Let's denote projected data set after centering as $\widetilde{\phi}(x_n)$.
 
 \begin{equation}
-\widetilde{\phi}(x_n) = \phi(x_n) - \frac{1}{N}\sum_{l=1}^{N} x_l
+\widetilde{\phi}(x_n) = \phi(x_n) - \frac{1}{N}\sum_{l=1}^{N} \phi(x_l)
 \end{equation}
 and the corresponding elements of the Gram matrix
 \begin{equation}
